@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
-
-import Movie from './movie/Index';
+import React, { Component, lazy, Suspense } from 'react';
 
 import { TabBar } from 'antd-mobile';
+
+const Movie = lazy(() => import('./movie/Index'));
+const Video = lazy(() => import('./video/Index'));
+const Show = lazy(() => import('./show/Index'));
+const Mine = lazy(() => import('./mine/Index'));
 
 class Index extends Component {
   state = {
@@ -19,7 +22,7 @@ class Index extends Component {
             barTintColor="white"
           >
             <TabBar.Item
-              title="movie"
+              title="电影"
               key="movie"
               icon={<span className="iconfont icon-dianying"></span>}
               selectedIcon={<span className="iconfont icon-dianying"></span>}
@@ -31,12 +34,14 @@ class Index extends Component {
               }}
               data-seed="logId"
             >
-              <Movie />
+              <Suspense fallback={<div>loading..</div>}>
+                <Movie />
+              </Suspense>
             </TabBar.Item>
             <TabBar.Item
               icon={<span className="iconfont icon-shipin"></span>}
               selectedIcon={<span className="iconfont icon-shipin"></span>}
-              title="video"
+              title="视频"
               key="video"
               selected={this.state.selectedTab === 'video'}
               onPress={() => {
@@ -46,12 +51,14 @@ class Index extends Component {
               }}
               data-seed="logId1"
             >
-              <div>video</div>
+              <Suspense fallback={<div>loading..</div>}>
+                <Video />
+              </Suspense>
             </TabBar.Item>
             <TabBar.Item
               icon={<span className="iconfont icon-zhanlan"></span>}
               selectedIcon={<span className="iconfont icon-zhanlan"></span>}
-              title="show"
+              title="演出"
               key="show"
               selected={this.state.selectedTab === 'show'}
               onPress={() => {
@@ -60,12 +67,14 @@ class Index extends Component {
                 });
               }}
             >
-              <div>show</div>
+              <Suspense fallback={<div>loading..</div>}>
+                <Show />
+              </Suspense>
             </TabBar.Item>
             <TabBar.Item
               icon={<span className="iconfont icon-wode2"></span>}
               selectedIcon={<span className="iconfont icon-wode2"></span>}
-              title="mine"
+              title="我的"
               key="mine"
               selected={this.state.selectedTab === 'mine'}
               onPress={() => {
@@ -74,7 +83,9 @@ class Index extends Component {
                 });
               }}
             >
-              <div>mine</div>
+              <Suspense fallback={<div>loading..</div>}>
+                <Mine />
+              </Suspense>
             </TabBar.Item>
           </TabBar>
         </div>
