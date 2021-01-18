@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import TopRated from './ui/TopRated';
 
 import { connect } from 'react-redux';
-import { getRatedListAsync } from '@/store/actionCreate';
+import { getRatedListAsync } from './actionCreate';
 
 const mapStateToProps = state => {
   return {
     // ratedList: state.ratedList
-    ratedList: state.get('ratedList')
+    // ratedList: state.get('ratedList')
+    ratedList: state.getIn(['hotReducer', 'ratedList'])
   }
 }
 

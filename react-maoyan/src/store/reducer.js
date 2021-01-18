@@ -1,22 +1,15 @@
-import { GET_RATED_LIST } from './actionTypes';
-import { Map } from 'immutable';
+// 用于合并各个页面的reducer
+import { combineReducers } from 'redux-immutable';
 
-const defaultState = Map({
-  ratedList: []
+import { reducer as hotReducer } from '../home/movie/hot/reducer';
+// import { reducer as classicReducer } from '../home/movie/classic/reducer';
+// import { reducer as waitReducer } from '../home/movie/wait/reducer';
+
+// 最大的reducer
+const reducer = combineReducers({
+  hotReducer: hotReducer,
+  // classicReducer: classicReducer,
+  // waitReducer: waitReducer
 })
-
-const reducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case GET_RATED_LIST:
-      // return {
-      //   ...state,
-      //   ratedList: action.list
-      // }
-      // return state.set('ratedList', action.list)
-      return state.setIn(['ratedList'], action.list)
-    default: 
-      return state;
-  }
-}
 
 export default reducer;
